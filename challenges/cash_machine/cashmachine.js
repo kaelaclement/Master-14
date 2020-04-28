@@ -181,7 +181,7 @@ const runCashMachine = () => {
 	while (exit == false) {
 		// get a selection from user
 		let selection = prompt(
-			`What would you like to do?
+			`What would you like to do? (ex. type "1" to check your balance)
 			1. Check balance
 			2. Withdrawal
 			3. Deposit
