@@ -86,7 +86,32 @@ const changePin = () => {
 	}
 }
 
-// Requirement 6 - exchange currency
+// Requirement 6 - check balance with optional crying
+const checkBalance = () => {
+	return balance;
+}
+
+// Requirement 7 - statement of actions
+const exitSequence = () => {
+	let receipt = prompt("Would you like a transcript of your transactions? Y/N").toUpperCase();
+
+	/**
+	 * TODO:
+	 * Create array of actions
+	 * Push each action into array
+	 * Print them out here in some way, if asked
+	 */
+	if (receipt == "Y") {
+		alert("here's your stuff");
+	} else if (receipt == "N") {
+		alert("ok byeeeeee");
+	} else {
+		alert("Please enter \"Y\" or \"N\"");
+		exitSequence();
+	}
+}
+
+// Requirement 8 - exchange currency
 const exchange = () => {
 	let amount = parseInt(prompt("How much would you like to exchange in GBP?"), 10);
 	let toCurrency = prompt("Please enter 3 letter currency code (eg EUR)").toUpperCase();
@@ -118,25 +143,6 @@ const exchange = () => {
 
 	return `Here is your ${currencySymb}${newAmount} ${toCurrency}`;
 
-}
-
-// Requirement 7 - check balance with optional crying
-const checkBalance = () => {
-	return balance;
-}
-
-// Requirement 8 - statement of actions
-const exitSequence = () => {
-	let receipt = prompt("Would you like a transcript of your transactions? Y/N").toUpperCase();
-
-	if (receipt == "Y") {
-		alert("here's your stuff");
-	} else if (receipt == "N") {
-		alert("ok byeeeeee");
-	} else {
-		alert("Please enter \"Y\" or \"N\"");
-		exitSequence();
-	}
 }
 
 // The interactive part, choose what you want to do etc.
