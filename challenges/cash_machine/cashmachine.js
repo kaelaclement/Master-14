@@ -14,6 +14,7 @@
 let pin = 1234;
 let balance = 1000;
 let withdrawalTotal = 0;
+let actions = [];
 
 // And these functions
 
@@ -57,6 +58,7 @@ const withdraw = amount => {
 	if (amount <= 250 && withdrawalTotal + amount <= 250) {
 		balance -= amount;
 		withdrawalTotal += amount;
+		actions.push(`Withdrew £${amount}`);
 		return `You have £${balance} remaining`;
 	} else {
 		console.log(withdrawalTotal);
@@ -68,6 +70,7 @@ const withdraw = amount => {
 const deposit = amount => {
 	if (amount <= 250) {
 		balance += amount;
+		actions.push(`Deposited £${amount}`);
 		return `You now have £${balance}`;
 	} else {
 		return "Sorry, you can only deposit £250 at a time.";
@@ -79,6 +82,7 @@ const changePin = () => {
 	let newPin = parseInt(prompt("Enter new PIN"), 10);
 	let pinConfirm = parseInt(prompt("Confirm new PIN."), 10);
 	if (newPin == pinConfirm) {
+		actions.push(`Changed PIN`);
 		pin = newPin
 		return `Your new PIN is ${pin}.`
 	} else {
@@ -88,6 +92,7 @@ const changePin = () => {
 
 // Requirement 6 - check balance with optional crying
 const checkBalance = () => {
+	actions.push(`Checked balance`);
 	return balance;
 }
 
@@ -95,16 +100,12 @@ const checkBalance = () => {
 const exitSequence = () => {
 	let receipt = prompt("Would you like a transcript of your transactions? Y/N").toUpperCase();
 
-	/**
-	 * TODO:
-	 * Create array of actions
-	 * Push each action into array
-	 * Print them out here in some way, if asked
-	 */
+	let text = actions.map(action => `${action}`).join("\n");
+
 	if (receipt == "Y") {
-		alert("here's your stuff");
+		alert(text);
 	} else if (receipt == "N") {
-		alert("ok byeeeeee");
+		alert("thank you for using your cash machine!");
 	} else {
 		alert("Please enter \"Y\" or \"N\"");
 		exitSequence();
@@ -140,6 +141,8 @@ const exchange = () => {
 	}
 
 	let newAmount = Math.floor(amount * exchangeRate);
+
+	actions.push(`Exchanged £${amount} GBP for ${currencySymb}${newAmount} ${toCurrency}`)
 
 	return `Here is your ${currencySymb}${newAmount} ${toCurrency}`;
 
