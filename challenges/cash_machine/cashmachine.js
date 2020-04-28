@@ -2,12 +2,15 @@
  * 1. Accept user PIN
  * 2. Check PIN
  * 3. Withdraw
- * 		a.Check withdraw limit (£250) per use
+ *     a.Check withdraw limit (£250) per use
  * 4. Deposit £250 at a time
  * 5. Change PIN with validation
  * 6. Check balance
  * 7. Statement of transactions
  * 8. Exchange currency - eg. GBP to USD
+ * 
+ * TODO:
+ * Add so many validations
  */
 
 // My program needs these variables
@@ -24,14 +27,19 @@ const checkPinSuccess = () => {
 	let attempts = 0;
 
 	while (attemptsLeft) {
+		// set userInput in the switch statement, based on if they have attempts left
 		let userInput;
+		// decide what to do based on if user has any attempts left to get their PIN right
 		switch (attempts) {
 			case 0:
+				// attempt one
 				userInput = prompt("Please enter your PIN");
 				attempts++;
 				break;
 			case 1:
+				// attempt 2
 			case 2:
+				// last chance
 				attempts++;
 				userInput = prompt("Incorrect PIN, please try again.");
 				break;
@@ -40,14 +48,16 @@ const checkPinSuccess = () => {
 				alert("Too many failed attempts, try again later.");
 				return false;
 			default:
+				// I haven't gotten here yet, but there's always a way to break things
 				attemptsLeft = false;
 				alert("What have you done???");
 				return false;
-				break;
 		}
 
 		if (userInput == pin) {
+			// this breaks the loop
 			attemptsLeft = false;
+			// this lets my if statement know to run the rest of the program
 			return true;
 		}
 	}
@@ -55,7 +65,9 @@ const checkPinSuccess = () => {
 
 // Requirement 3 - withdraw £250/program run
 const withdraw = amount => {
+	// check that withdrawal limit isn't reached
 	if (amount <= 250 && withdrawalTotal + amount <= 250) {
+		// remove balance, keep track of withdrawals, record transaction
 		balance -= amount;
 		withdrawalTotal += amount;
 		actions.push(`Withdrew £${amount}`);
@@ -68,7 +80,9 @@ const withdraw = amount => {
 
 // Requirement 4 - deposit £250 at a time
 const deposit = amount => {
+	// check that deposit limit isn't reached
 	if (amount <= 250) {
+		// add deposit to balance and record transaction
 		balance += amount;
 		actions.push(`Deposited £${amount}`);
 		return `You now have £${balance}`;
@@ -79,9 +93,12 @@ const deposit = amount => {
 
 // Requirement 5 - change PIN with validation
 const changePin = () => {
+	// get new PIN from user
 	let newPin = parseInt(prompt("Enter new PIN"), 10);
 	let pinConfirm = parseInt(prompt("Confirm new PIN."), 10);
+	// make sure PINs match
 	if (newPin == pinConfirm) {
+		// record transaction if PIN is changed
 		actions.push(`Changed PIN`);
 		pin = newPin
 		return `Your new PIN is ${pin}.`
@@ -98,15 +115,17 @@ const checkBalance = () => {
 
 // Requirement 7 - statement of actions
 const exitSequence = () => {
+	// ask if user wants record of transactions
 	let receipt = prompt("Would you like a transcript of your transactions? Y/N").toUpperCase();
 
-	let text = actions.map(action => `${action}`).join("\n");
-
 	if (receipt == "Y") {
+		// create list of transactions from actions array
+		let text = actions.map(action => `${action}`).join("\n");
 		alert(text);
 	} else if (receipt == "N") {
 		alert("thank you for using your cash machine!");
 	} else {
+		// get valid input if something other than 'y' or 'n' given
 		alert("Please enter \"Y\" or \"N\"");
 		exitSequence();
 	}
@@ -114,9 +133,13 @@ const exitSequence = () => {
 
 // Requirement 8 - exchange currency
 const exchange = () => {
+	// get exchange amount and currency desired from user
 	let amount = parseInt(prompt("How much would you like to exchange in GBP?"), 10);
 	let toCurrency = prompt("Please enter 3 letter currency code (eg EUR)").toUpperCase();
+
+	// declare exchange rate to set in switch statement
 	let exchangeRate;
+	// currently this only changes for euros
 	let currencySymb = "$";
 	switch (toCurrency) {
 		case "EUR":
@@ -140,8 +163,10 @@ const exchange = () => {
 			return "Sorry, I can't exchange that currency at this time.";
 	}
 
+	// this is not a very good way to do this in the real world, but it'll do for now
 	let newAmount = Math.floor(amount * exchangeRate);
 
+	// record transaction for possible receipt later
 	actions.push(`Exchanged £${amount} GBP for ${currencySymb}${newAmount} ${toCurrency}`)
 
 	return `Here is your ${currencySymb}${newAmount} ${toCurrency}`;
@@ -150,9 +175,11 @@ const exchange = () => {
 
 // The interactive part, choose what you want to do etc.
 const runCashMachine = () => {
+	// assume they don't want to leave yet
 	let exit = false;
 
 	while (exit == false) {
+		// get a selection from user
 		let selection = prompt(
 			`What would you like to do?
 			1. Check balance
@@ -162,8 +189,10 @@ const runCashMachine = () => {
 			5. Change PIN
 			6. Exit`
 		);
+		// make that selection a number
 		selection = parseInt(selection, 10);
 
+		// do what user wanted to do
 		switch (selection) {
 			case 1:
 				alert(`£${checkBalance()}`);
@@ -184,6 +213,7 @@ const runCashMachine = () => {
 				break;
 			case 6:
 				exit = true;
+				// when they want to exit, run the exit sequence
 				exitSequence();
 				break;
 			default:
