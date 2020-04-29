@@ -4,27 +4,39 @@
 
 * {
     font-family: 'IBM Plex Mono', monospace;
+    padding: 0em 1em;
 }
 
 header {
     background-image: url(../img/huntington.png);
-    padding: 5em;
+    padding: 4em;
+    margin: -1em -5em 0;
 }
 
 header h1 {
     font-family: 'Roboto', sans-serif;
-    text-shadow: 2px 2px black;
-    color: whitesmoke;
+    font-size: 2.5em;
+    font-weight: 100;
+    text-shadow: 4px 4px black;
+    color: rgb(247, 247, 247);
     text-align: center;
+    margin-bottom: .5em;
 }
 
 header h2 {
-    color: white;
+    /* color: rgba(220, 220, 220, 0.808); */
+    color: rgb(220, 220, 220);
     text-align: center;
+    font-size: 1em;
+    margin-top: .5em;
 }
 
 h3 {
     font-family: 'Roboto', sans-serif;
+}
+
+p {
+    color: darkslategray;
 }
 
 header h2,
@@ -36,4 +48,90 @@ h2 {
     background: url(../img/zen.svg);
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+abbr {
+    padding: 0;
+}
+
+a {
+    padding: 0;
+}
+
+h3 {
+    color: black;
+}
+
+.participation,
+.benefits {
+    background-image: url(../img/bamboo.png);
+    background-color: rgb(117, 157, 122);
+    margin: 0 -5em;
+    padding: .05em 6em;
+}
+
+.participation p,
+.benefits p {
+    color: rgb(240, 240, 240);
+}
+
+p[role=contentinfo] {
+    background-color: rgb(117, 157, 122);
+    margin: 0 -6em;
+    padding: 1em 6em;
+    color: rgb(153, 164, 154);
+    font-weight: 100;
+}
+
+p[role=contentinfo] a {
+    font-family: 'Satisfy', cursive;
+    color: white;
+    font-size: 1.5em;
+    font-weight: 100;
+    text-decoration: none;
+}
+
+p[role=contentinfo] a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    background-color: rgb(35, 76, 75);
+    text-align: center;
+    font-size: 1.5em;
+    margin: 0 -6em;
+    padding: 0 6em;
+}
+
+footer i {
+    color: rgb(255, 255, 255);
+    padding: .5em;
+}
+
+footer a {
+    color: rgb(35, 76, 75);
+}
+
+nav ul {
+    column-count: 2;
+    background-color: rgb(213, 226, 214);
+    margin: 0 -10em;
+    padding: .5em 15em;
+}
+
+nav ul a {
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.zen-resources {
+    column-count: 2;
+    background-image: url(../img/bamboo.png);
+    background-color: rgb(117, 157, 122);
+    margin: 0 -6em;
+    padding: .05em 15em;
+}
+
+.wrapper h3 {
+    display: none;
 }
