@@ -129,6 +129,18 @@ nav ul a {
     font-family: 'Roboto', sans-serif;
 }
 
+.design-selection nav ul li a:nth-child(2),
+.design-archives nav ul li a {
+    color: rgb(174, 174, 174);
+}
+
+.design-selection a {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+}
 
 .zen-resources {
     column-count: 2;
