@@ -118,6 +118,10 @@ footer a {
     color: rgb(35, 76, 75);
 }
 
+footer i:hover {
+    color: rgb(168, 168, 168);
+}
+
 nav ul {
     column-count: 2;
     background-color: rgb(213, 226, 214);
@@ -148,6 +152,10 @@ ul {
     background-color: rgb(117, 157, 122);
     margin: 0 -6em;
     padding: .05em 15em;
+}
+
+.zen-resources a {
+    color: rgb(75, 104, 80);
 }
 
 .wrapper h3 {
