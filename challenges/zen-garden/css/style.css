@@ -129,6 +129,16 @@ nav ul {
     padding: .5em 15em;
 }
 
+nav ul li {
+    padding: 2em 20em;
+    margin: 0 -20em;
+    text-align: center;
+}
+
+.design-selection ul li {
+    border-bottom: .005em solid black;
+}
+
 nav ul a {
     font-family: 'Roboto', sans-serif;
 }
@@ -155,7 +165,12 @@ ul {
 }
 
 .zen-resources a {
+    font-family: 'IBM Plex Mono', monospace;
     color: rgb(75, 104, 80);
+}
+
+.zen-resources li {
+    padding: .5em;
 }
 
 .wrapper h3 {
