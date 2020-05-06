@@ -1,5 +1,3 @@
-// 
-
 const searchButton = document.getElementById('searchButton');
 const clearButton = document.getElementById('clearButton');
 const searchInput = document.getElementById('searchTerm');
@@ -15,6 +13,11 @@ const makeDivs = (term, num) => {
 	}
 }
 
+const reset = () => {
+	searchInput.value = 'Search term';
+	numResults.value = 'Number of results';
+}
+
 
 searchButton.addEventListener('click', () => {
 	if (isNaN(numResults.value)) {
@@ -23,9 +26,11 @@ searchButton.addEventListener('click', () => {
 		const term = searchInput.value;
 		const num = parseInt(numResults.value);
 		makeDivs(term, num);
+		reset();
 	}
 })
 
 clearButton.addEventListener('click', () => {
 	wrapper.innerHTML = '';
+	reset();
 })
