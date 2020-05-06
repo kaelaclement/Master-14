@@ -18,6 +18,7 @@ let pin = 1234;
 let balance = 1000;
 let withdrawalTotal = 0;
 let actions = [];
+const wrapper = document.getElementById('wrapper');
 
 // And these functions
 
@@ -26,9 +27,15 @@ const checkPinSuccess = () => {
 	let attemptsLeft = true;
 	let attempts = 0;
 
+	const pinForm = `<p>Please enter your PIN:</p><br>
+	<input type="text" name="pin" id="pin"><br>
+	<input type="button" value="Enter PIN">`
+
+	wrapper.innerHTML = pinForm;
+
 	while (attemptsLeft) {
 		// set userInput in the switch statement, based on if they have attempts left
-		let userInput;
+		let userInput = ;
 		// decide what to do based on if user has any attempts left to get their PIN right
 		switch (attempts) {
 			case 0:
@@ -223,7 +230,8 @@ const runCashMachine = () => {
 	}
 }
 
+
 // ######## Run the actual program ########
-if (checkPinSuccess()) {
-	runCashMachine();
-}
+// if (checkPinSuccess()) {
+// 	runCashMachine();
+// }
