@@ -6,8 +6,9 @@ const wrapper = document.getElementById('wrapper');
 
 const makeDivs = (term, num) => {
 	for (let i = 0; i < num; i++) {
+		let randNum = Math.floor((Math.random() * 100) + 1);
 		let img = document.createElement('img');
-		img.src = `https://source.unsplash.com/random/500x500/?sig=${i}&${term}`;
+		img.src = `https://source.unsplash.com/random/500x500/?sig=${randNum}&${term}`;
 		img.className = 'box';
 		wrapper.appendChild(img);
 	}
