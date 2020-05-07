@@ -3,6 +3,7 @@ const diceDiv = document.getElementById('dice');
 const scoreDiv = document.getElementById('score');
 
 let score = 0;
+let gameOver = false;
 
 const showDie = num => {
 	switch (num) {
@@ -26,11 +27,14 @@ const showDie = num => {
 const setScore = (num) => {
 	if (score + num >= 21) {
 		score = 0;
+		gameOver = true;
 		return 'You won! :)';
 	} else if (num == 1) {
 		score = 0;
+		gameOver = true;
 		return 'You lost :(';
 	} else {
+		gameOver = false;
 		score += num;
 		return `<p>${score}</p>`;
 	}
@@ -40,6 +44,12 @@ const roll = () => {
 	let num = Math.floor((Math.random() * 6) + 1);
 	let scoreInfo = setScore(num);
 	let dice = showDie(num);
+
+	if (gameOver) {
+		rollButton.value = 'Start over?';
+	} else {
+		rollButton.value = 'roll';
+	}
 
 	scoreDiv.innerHTML = scoreInfo;
 	diceDiv.innerHTML = dice;
