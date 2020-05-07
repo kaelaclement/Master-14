@@ -5,7 +5,7 @@ const pin = 1234;
 
 const checkPin = (userInput) => {
 	if (userInput == pin) {
-		wrapper.innerHTML = `<h1>ta-da</h1>`;
+		wrapper.innerHTML = menu();
 	} else {
 		alert('what happened');
 	}
@@ -15,3 +15,11 @@ pinButton.addEventListener('click', () => {
 	checkPin(pinEntered.value);
 	pinEntered.value = '';
 });
+
+const menu = () => {
+	const menuText =
+		`<p>What would you like to do?</p><br>
+	<input type="button" id="checkBalance"><br>
+	<input type="button" id="withdrawal">`
+	return menuText;
+}
