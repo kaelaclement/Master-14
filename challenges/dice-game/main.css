@@ -1,0 +1,9 @@
+h1 {
+	text-align: center;
+}
+
+.gameBox {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
