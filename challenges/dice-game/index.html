@@ -9,12 +9,20 @@
 </head>
 
 <body>
-	<h1>Single Player Dice Game</h1>
-
 	<div class="gameBox">
-		<div id="score">0</div>
-		<div id="dice"></div>
-		<input type="button" id="rollButton" value="roll">
+		<div class="playerBox" id="playerOne">
+			<h2>Player One</h2>
+			<div id="playerOneScore">0</div>
+			<div id="playerOneDice"></div>
+			<input type="button" id="playerOneRoll" value="roll">
+		</div>
+
+		<div class="playerBox" id="playerTwo">
+			<h2>Player Two</h2>
+			<div id="playerTwoScore">0</div>
+			<div id="playerTwoDice"></div>
+			<input type="button" id="playerTwoRoll" value="roll">
+		</div>
 	</div>
 
 
