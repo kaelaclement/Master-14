@@ -4,6 +4,12 @@ h1 {
 
 .gameBox {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
+	justify-content: center;
+}
+
+.playerBox {
+	padding: 5em;
+	margin: 5em;
 }
