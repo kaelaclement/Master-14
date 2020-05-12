@@ -2,9 +2,14 @@ const rollButton = document.getElementById('rollButton');
 const diceDiv = document.getElementById('dice');
 const scoreDiv = document.getElementById('score');
 
-let score = 0;
+// let score = 0;
 let gameOver = false;
-let won = false;
+// let won = false;
+
+let playerOne = {
+	score: 0,
+	won: false
+}
 
 const showDie = num => {
 	switch (num) {
@@ -25,39 +30,39 @@ const showDie = num => {
 	}
 }
 
-const setScore = (score, num) => {
+const setScore = (num, player) => {
 	let newScore;
-	if (score + num >= 21) {
-		won = true;
+	if (player.score + num >= 21) {
+		player.won = true;
 		gameOver = true;
 		newScore = 0;
 	} else if (num == 1) {
-		won = false;
+		player.won = false;
 		gameOver = true;
 		newScore = 0;
 	} else {
 		gameOver = false;
-		won = false;
-		newScore = score + num;
+		player.won = false;
+		newScore = player.score + num;
 	}
 
 	return newScore;
 }
 
-const setScoreInfo = score => {
-	if (gameOver && won) {
+const setScoreInfo = player => {
+	if (gameOver && player.won) {
 		return 'You won! :)';
 	} else if (gameOver) {
 		return 'You lost :(';
 	} else {
-		return `<p>${score}</p>`;
+		return `<p>${player.score}</p>`;
 	}
 }
 
-const roll = () => {
+const roll = (player) => {
 	let num = Math.floor((Math.random() * 6) + 1);
-	score = setScore(score, num);
-	let scoreInfo = setScoreInfo(score);
+	player.score = setScore(num, player);
+	let scoreInfo = setScoreInfo(player);
 	let dice = showDie(num);
 
 	if (gameOver) {
@@ -70,4 +75,4 @@ const roll = () => {
 	diceDiv.innerHTML = dice;
 }
 
-rollButton.onclick = roll;
+rollButton.onclick = () => roll(playerOne);
