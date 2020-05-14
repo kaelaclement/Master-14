@@ -9,7 +9,7 @@ let gameOver = false;
 let playerOne = {
 	score: 0,
 	won: false
-}
+};
 
 const showDie = num => {
 	switch (num) {
