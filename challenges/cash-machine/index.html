@@ -11,11 +11,29 @@
 <body>
 	<h1>Your cash machine</h1>
 	<div id="wrapper">
-		<p>Please enter your PIN:</p>
-		<br>
-		<input type="text" name="pin" id="pin">
-		<br>
-		<input type="button" id="pinSubmit" value="Enter PIN">
+		<div class="accountInfo">
+			<p>Please enter your account and PIN:</p>
+			<br>
+			<input type="text" name="account" id="account">
+			<br>
+			<input type="text" name="pin" id="pin">
+			<br>
+			<input type="button" id="pinSubmit" value="Enter PIN">
+		</div>
+
+		<div id="menu">
+			<h3>What would you like to do?</h3>
+			<input type="button" id="checkBalance" value="Check balance">
+			<input type="button" id="withdrawal" value="Withdrawal">
+			<input type="button" id="deposit" value="Deposit">
+			<input type="button" id="exchange" value="Exchange currency">
+			<input type="button" id="changePin" value="Change PIN">
+			<input type="button" id="logOut" value="Log out">
+		</div>
+
+		<div id="transactions">
+
+		</div>
 	</div>
 	<script src="index.js"></script>
 </body>
