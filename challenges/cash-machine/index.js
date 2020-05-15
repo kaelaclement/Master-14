@@ -7,6 +7,7 @@ const menu = document.getElementById('menu');
 const checkBalanceButton = document.getElementById('checkBalance');
 const withdrawButton = document.getElementById('withdrawal');
 const depositButton = document.getElementById('deposit');
+const exchangeButton = document.getElementById('exchange');
 
 let currentUser;
 
@@ -17,7 +18,7 @@ let accounts = {
 	}
 }
 
-const checkAccount = (accountNumber) => {
+const checkAccount = accountNumber => {
 	let account = accounts[accountNumber];
 	if (account) {
 		return true;
@@ -46,6 +47,14 @@ const withdraw = () => {
 	currentUser.balance = currentUser.balance - amount;
 	let content = document.createElement('p')
 	content.innerText = `Withdrawal: £${amount}\nNew Balance: £${currentUser.balance}`
+	transactions.appendChild(content);
+}
+
+const deposit = () => {
+	let amount = parseInt(prompt('How much would you like to deposit?'));
+	currentUser.balance = currentUser.balance + amount;
+	let content = document.createElement('p');
+	content.innerText = `Deposit: £${amount}\nNew Balance: £${currentUser.balance}`
 	transactions.appendChild(content);
 }
 
@@ -89,10 +98,7 @@ pinButton.onclick = () => {
 
 checkBalanceButton.onclick = checkBalance;
 withdrawButton.onclick = withdraw;
-depositButton.onclick = () => {
-	let amount = parseInt(prompt('How much would you like to deposit?'));
-	currentUser.balance = currentUser.balance + amount;
-	let content = document.createElement('p');
-	content.innerText = `Deposit: £${amount}\nNew Balance: £${currentUser.balance}`
-	transactions.appendChild(content);
+depositButton.onclick = deposit;
+exchangeButton.onclick = () => {
+	alert('that\'s the exchange button, alright');
 }
