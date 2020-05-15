@@ -1,3 +1,4 @@
+// get all those lovely DOM elements we'll need
 const wrapper = document.getElementById('wrapper');
 const transactions = document.getElementById('transactions');
 const pinButton = document.getElementById('pinSubmit');
@@ -9,8 +10,10 @@ const withdrawButton = document.getElementById('withdrawal');
 const depositButton = document.getElementById('deposit');
 const exchangeButton = document.getElementById('exchange');
 
+// will set this on login
 let currentUser;
 
+// this will eventually be more useful, but for now it hides away accounts...a little
 let accounts = {
 	123456789: {
 		pin: 1234,
@@ -18,6 +21,7 @@ let accounts = {
 	}
 }
 
+// make sure the account exists
 const checkAccount = accountNumber => {
 	let account = accounts[accountNumber];
 	if (account) {
@@ -27,6 +31,7 @@ const checkAccount = accountNumber => {
 	}
 }
 
+// make sure the PIN matches the existing account
 const checkPin = (accountNumber, pin) => {
 	let account = accounts[accountNumber];
 	if (checkAccount(accountNumber) && account.pin == pin) {
@@ -36,12 +41,14 @@ const checkPin = (accountNumber, pin) => {
 	}
 }
 
+// check balance of current user
 const checkBalance = () => {
 	let content = document.createElement('p');
 	content.innerText = `Your balance is: £${currentUser.balance}`;
 	transactions.appendChild(content);
 }
 
+// withdraw amount of money - TODO: add £250 limit
 const withdraw = () => {
 	let amount = parseInt(prompt('How much would you like to withdraw?'));
 	currentUser.balance = currentUser.balance - amount;
@@ -50,6 +57,7 @@ const withdraw = () => {
 	transactions.appendChild(content);
 }
 
+// deposit user given amount - TODO: add £250 limit
 const deposit = () => {
 	let amount = parseInt(prompt('How much would you like to deposit?'));
 	currentUser.balance = currentUser.balance + amount;
@@ -58,10 +66,56 @@ const deposit = () => {
 	transactions.appendChild(content);
 }
 
+// exchange money - TODO: take money out of account. use decimals, you know, like money
+const exchange = () => {
+	// get exchange amount and currency desired from user
+	let amount = parseInt(prompt("How much would you like to exchange in GBP?"), 10);
+	let toCurrency = prompt("Please enter 3 letter currency code (eg EUR)").toUpperCase();
+
+	// declare exchange rate to set in switch statement
+	let exchangeRate;
+
+	// currently this only changes for euros
+	let currencySymb = "$";
+
+	// set exchange rate
+	switch (toCurrency) {
+		case "EUR":
+			exchangeRate = 1.14;
+			currencySymb = "€"
+			break;
+		case "USD":
+			exchangeRate = 1.23;
+			break;
+		case "NZD":
+			exchangeRate = 2.07;
+			break;
+		case "AUD":
+			exchangeRate = 1.95;
+			break;
+		case "CAD":
+			exchangeRate = 1.74;
+			break;
+		default:
+			console.log(toCurrency);
+			return "Sorry, I can't exchange that currency at this time.";
+	}
+
+	// floats are a thing, I'm sure of it
+	let newAmount = Math.floor(amount * exchangeRate);
+
+	// get what you did on that DOM
+	let content = document.createElement('p');
+	content.innerText = `Here is your ${currencySymb}${newAmount} ${toCurrency}`
+	transactions.appendChild(content);
+}
+
+// show menu on successful login
 const showMenu = () => {
 	menu.style.display = 'flex';
 }
 
+// will use this for log out
 const hideMenu = () => {
 	menu.style.display = 'none';
 }
@@ -99,6 +153,4 @@ pinButton.onclick = () => {
 checkBalanceButton.onclick = checkBalance;
 withdrawButton.onclick = withdraw;
 depositButton.onclick = deposit;
-exchangeButton.onclick = () => {
-	alert('that\'s the exchange button, alright');
-}
+exchangeButton.onclick = exchange;
