@@ -9,6 +9,7 @@ const checkBalanceButton = document.getElementById('checkBalance');
 const withdrawButton = document.getElementById('withdrawal');
 const depositButton = document.getElementById('deposit');
 const exchangeButton = document.getElementById('exchange');
+const changePinButton = document.getElementById('changePin');
 
 // will set this on login
 let currentUser;
@@ -110,6 +111,23 @@ const exchange = () => {
 	transactions.appendChild(content);
 }
 
+// change user PIN
+const changePin = () => {
+	// get new PIN from user
+	let newPin = parseInt(prompt("Enter new PIN"), 10);
+	let pinConfirm = parseInt(prompt("Confirm new PIN."), 10);
+	// make sure PINs match
+	if (newPin == pinConfirm) {
+		// record transaction if PIN is changed
+		currentUser.pin = newPin
+		let content = document.createElement('p');
+		content.innerText = `Your new PIN is ${currentUser.pin}`
+		transactions.appendChild(content);
+	} else {
+		alert("Sorry, PIN does not match. Try again.")
+	}
+}
+
 // show menu on successful login
 const showMenu = () => {
 	menu.style.display = 'flex';
@@ -154,3 +172,4 @@ checkBalanceButton.onclick = checkBalance;
 withdrawButton.onclick = withdraw;
 depositButton.onclick = deposit;
 exchangeButton.onclick = exchange;
+changePinButton.onclick = changePin;
