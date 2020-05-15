@@ -10,6 +10,7 @@ const withdrawButton = document.getElementById('withdrawal');
 const depositButton = document.getElementById('deposit');
 const exchangeButton = document.getElementById('exchange');
 const changePinButton = document.getElementById('changePin');
+const logOutButton = document.getElementById('logOut');
 
 // will set this on login
 let currentUser;
@@ -42,6 +43,26 @@ const checkPin = (accountNumber, pin) => {
 	}
 }
 
+// trying login function
+const logIn = () => {
+	let tryAccount = acctEntered.value;
+	let tryPin = pinEntered.value;
+
+	let accountExists = checkAccount(tryAccount);
+	let pinCorrect = checkPin(tryAccount, tryPin);
+
+	if (accountExists && pinCorrect) {
+		currentUser = accounts[tryAccount];
+		showMenu();
+	} else if (accountExists) {
+		alert('Please enter correct PIN');
+	} else {
+		alert('Cannot find account');
+	}
+	pinEntered.value = '';
+	acctEntered.value = '';
+}
+
 // check balance of current user
 const checkBalance = () => {
 	let content = document.createElement('p');
@@ -53,8 +74,8 @@ const checkBalance = () => {
 const withdraw = () => {
 	let amount = parseInt(prompt('How much would you like to withdraw?'));
 	currentUser.balance = currentUser.balance - amount;
-	let content = document.createElement('p')
-	content.innerText = `Withdrawal: £${amount}\nNew Balance: £${currentUser.balance}`
+	let content = document.createElement('p');
+	content.innerText = `Withdrawal: £${amount}\nNew Balance: £${currentUser.balance}`;
 	transactions.appendChild(content);
 }
 
@@ -63,7 +84,7 @@ const deposit = () => {
 	let amount = parseInt(prompt('How much would you like to deposit?'));
 	currentUser.balance = currentUser.balance + amount;
 	let content = document.createElement('p');
-	content.innerText = `Deposit: £${amount}\nNew Balance: £${currentUser.balance}`
+	content.innerText = `Deposit: £${amount}\nNew Balance: £${currentUser.balance}`;
 	transactions.appendChild(content);
 }
 
@@ -107,7 +128,7 @@ const exchange = () => {
 
 	// get what you did on that DOM
 	let content = document.createElement('p');
-	content.innerText = `Here is your ${currencySymb}${newAmount} ${toCurrency}`
+	content.innerText = `Here is your ${currencySymb}${newAmount} ${toCurrency}`;
 	transactions.appendChild(content);
 }
 
@@ -119,12 +140,21 @@ const changePin = () => {
 	// make sure PINs match
 	if (newPin == pinConfirm) {
 		// record transaction if PIN is changed
-		currentUser.pin = newPin
+		currentUser.pin = newPin;
 		let content = document.createElement('p');
-		content.innerText = `Your new PIN is ${currentUser.pin}`
+		content.innerText = `Your new PIN is ${currentUser.pin}`;
 		transactions.appendChild(content);
 	} else {
-		alert("Sorry, PIN does not match. Try again.")
+		alert("Sorry, PIN does not match. Try again.");
+	}
+}
+
+const exit = () => {
+	if (confirm('Are you sure you want to exit?')) {
+		transactions.innerHTML = '';
+		hideMenu();
+		alert('Thanks for using this cash machine!');
+		currentUser = undefined;
 	}
 }
 
@@ -149,27 +179,28 @@ const hideMenu = () => {
 // 	acctEntered.value = '';
 // });
 
-pinButton.onclick = () => {
-	let tryAccount = acctEntered.value;
-	let tryPin = pinEntered.value;
+// pinButton.onclick = () => {
+// 	let tryAccount = acctEntered.value;
+// 	let tryPin = pinEntered.value;
 
-	let accountExists = checkAccount(tryAccount);
-	let pinCorrect = checkPin(tryAccount, tryPin);
+// 	let accountExists = checkAccount(tryAccount);
+// 	let pinCorrect = checkPin(tryAccount, tryPin);
 
-	if (accountExists && pinCorrect) {
-		currentUser = accounts[tryAccount];
-		showMenu();
-	} else if (accountExists) {
-		alert('Please enter correct PIN');
-	} else {
-		alert('Cannot find account');
-	}
-	pinEntered.value = '';
-	acctEntered.value = '';
-}
-
+// 	if (accountExists && pinCorrect) {
+// 		currentUser = accounts[tryAccount];
+// 		showMenu();
+// 	} else if (accountExists) {
+// 		alert('Please enter correct PIN');
+// 	} else {
+// 		alert('Cannot find account');
+// 	}
+// 	pinEntered.value = '';
+// 	acctEntered.value = '';
+// }
+pinButton.onclick = logIn;
 checkBalanceButton.onclick = checkBalance;
 withdrawButton.onclick = withdraw;
 depositButton.onclick = deposit;
 exchangeButton.onclick = exchange;
 changePinButton.onclick = changePin;
+logOutButton.onclick = exit;
